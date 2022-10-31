@@ -167,3 +167,7 @@ a {
     width: 90%;
   }
 }
+
+.no-select{
+  letter-spacing: 2px;
+}

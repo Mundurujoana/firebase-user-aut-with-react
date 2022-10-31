@@ -31,8 +31,21 @@ const firebaseConfig = {
   };
 
 
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig)
   const auth = getAuth(app);
   const db = getFirestore(app);
   const googleProvider = new GoogleAuthProvider();
   const analytics = getAnalytics(app);
+
+export default app;
+
+  //  export const signInWithGoogle = () => {
+  //   signInWithPopup(auth, googleProvider)
+  //   .then((result) =>{
+  //     console.log(result)
+  //   })
+
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
+  // }
