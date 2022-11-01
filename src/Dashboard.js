@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <div className='dash-body'>
  <button className='dash-btn' onClick={logout}>Logout</button>
- <Link  className='dash-btn1' to="/login">Sign in</Link> 
+ <Link  className='dash-btn1' to="/login">Go back</Link> 
 
     </div>
   )
