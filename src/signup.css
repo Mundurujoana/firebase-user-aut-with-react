@@ -4,7 +4,7 @@ body {
   background: #4D9F92;
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: white;
+  color: rgb(0, 0, 0);
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
@@ -35,12 +35,12 @@ body {
   padding-left: 20px;
   border: none;
   background-color: rgba(255, 255, 255, 0.4);
-  color: white;
+  color: rgb(0, 0, 0);
   outline: none;
 }
 
 .content__input--form > label > input::placeholder {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 13px;
 }
 
@@ -60,7 +60,7 @@ body {
   flex-direction: row;
   align-items: center;
   background-color: #4385F5;
-  color: white;
+  color: rgb(255, 255, 255);
   overflow: hidden;
 }
 
@@ -103,7 +103,7 @@ body {
 
 a {
   text-decoration: none;
-  color: white;
+  color: rgb(0, 0, 0);
 }
 
 @media screen and (max-width: 800px) {
@@ -166,4 +166,8 @@ a {
   .content__footer {
     width: 90%;
   }
+}
+
+.no-select{
+  letter-spacing: 2px;
 }

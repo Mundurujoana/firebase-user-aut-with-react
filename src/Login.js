@@ -15,25 +15,19 @@ const Login = () => {
     const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
     useEffect(() => {
-      if (loading) {
-        // maybe trigger a loading screen
-        return;
-      }
       if (user) navigate("/dashboard");
-    }, [user, loading]);
+    }, [user]);
     
     
     const SignIn = ()=> {
       signInWithEmailAndPassword (auth, email, password)
         .then((userCredential) => {
-          // Signed in 
           const user = userCredential.user;
           console.log(user)
           alert('This user has successfully signed in')
         })
         .catch((error) => {
           const errorCode = error.code;
-          // const errorMessage = error.message;
          alert(errorCode)
         });
        }
@@ -58,7 +52,6 @@ const Login = () => {
      const email = error.customData.email;
      // The AuthCredential type that was used.
      const credential = GoogleAuthProvider.credentialFromError(error);
-   
      console.logo(errorCode)
    })
  }

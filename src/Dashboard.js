@@ -1,6 +1,8 @@
 import React from 'react';
 import app from './Firebase'
 import { getAuth, signOut } from "firebase/auth";
+import "./dashboard.css";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -9,13 +11,15 @@ const Dashboard = () => {
   const logout= () => {
   signOut(auth).then(() => {
     console.log('Signed Out Successfully');
+    alert('You have been signed out')
   }).catch((error) => {
     console.error('Sign Out Error', error);
   })}
 
   return (
-    <div>
- <button onClick={logout}>Logout</button>
+    <div className='dash-body'>
+ <button className='dash-btn' onClick={logout}>Logout</button>
+ <Link  className='dash-btn1' to="/login">Sign in</Link> 
 
     </div>
   )
