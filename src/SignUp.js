@@ -100,7 +100,7 @@ const SignUp = () => {
     <div className="content__submit--line"></div>
     <p>
       Already have an account? 
-      <Link to="/login">Sign in</Link>
+      <Link to="/">Sign in</Link>
     </p>
     <div className="content__footer">
       <p>

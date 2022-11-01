@@ -2,7 +2,7 @@ import React from 'react';
 import app from './Firebase'
 import { getAuth, signOut } from "firebase/auth";
 import "./dashboard.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <div className='dash-body'>
  <button className='dash-btn' onClick={logout}>Logout</button>
- <Link  className='dash-btn1' to="/login">Go back</Link> 
+ <Link  className='dash-btn1' to="/">Go back</Link> 
 
     </div>
   )
