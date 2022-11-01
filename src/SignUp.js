@@ -8,30 +8,37 @@ const SignUp = () => {
 
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    const db = getFirestore(app);
 
   
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
-    
-      const SignUpp= async (name, email, password) => {
-        try {
-          const response = await createUserWithEmailAndPassword(auth, email, password)
-          const user = response.user;
-          await addDoc(collection(db, "users"), {
-            uid: user.uid,
-            name,
-            authProvider: "local",
-            email,
-          });
-        } catch (err) {
-          console.error(err);
-          alert(err.message);
-        }
-      };
+    const [error, seterror] = useState("");
 
+    
+      const SignUpp= () => {
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user)
+          alert('This user has successfully signed in')
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          // const errorMessage = error.message;
+         alert(errorCode)
+        });
+       }
+
+       const handleSubmit = (e) => {
+        e.preventDefault();
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        const res = SignUpp(email, password);
+        if (res.error) seterror(res.error);
+        };
        
 
     
@@ -44,7 +51,7 @@ const SignUp = () => {
     // The signed-in user info.
     const user = result.user;
     console.log(user)
-    alert('Successfully signed In')
+    alert('Successfully created Your account')
 
 
   }).catch((error) => {
@@ -68,7 +75,7 @@ const SignUp = () => {
 
 <div className="main-container__content">
   <div className="content__inputs">
-    <form className="content__input--form">
+    <form className="content__input--form"  onSubmit={handleSubmit} >
 
       <label Htmlfor="username">
         <input type="text" placeholder="Username"  value={username}

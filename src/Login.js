@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
 import './login.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import app from './Firebase'
 import { getAuth, signInWithEmailAndPassword,  signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
 
@@ -12,6 +12,15 @@ const Login = () => {
    
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [user, loading, error] = useAuthState(auth);
+    const navigate = useNavigate();
+    useEffect(() => {
+      if (loading) {
+        // maybe trigger a loading screen
+        return;
+      }
+      if (user) navigate("/dashboard");
+    }, [user, loading]);
     
     
     const SignIn = ()=> {
@@ -22,13 +31,13 @@ const Login = () => {
           console.log(user)
           alert('This user has successfully signed in')
         })
-      
         .catch((error) => {
           const errorCode = error.code;
           // const errorMessage = error.message;
          alert(errorCode)
         });
        }
+
        const GoogleSignIn = () => {      
         signInWithPopup(auth, provider)
    .then((result) => {
