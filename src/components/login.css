@@ -171,3 +171,9 @@ a {
 .no-select{
   letter-spacing: 2px;
 }
+
+.link{
+  color: #ffffff;
+font-weight: bold;
+text-decoration: underline;
+}
