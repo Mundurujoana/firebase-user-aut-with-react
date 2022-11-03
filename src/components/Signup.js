@@ -16,6 +16,7 @@ const Signup = () => {
     setError("");
     try {
       await signUp(email, password);
+      alert("registered successfully")
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -31,7 +32,7 @@ const Signup = () => {
     {error && <p className='errors'>{error}</p>}
 <div className="main-container__content">
   <div className="content__inputs">
-    <form className="content__input--form"  onSubmit={handleSubmit} >
+    <form className="content__input--form" >
       <label Htmlfor="email">
         <input type="email" placeholder="Email"  value={email} onChange={(e) => setEmail(e.target.value)} />
       </label>
@@ -42,7 +43,7 @@ const Signup = () => {
   </div>
 
   <div className="content__submit">
-    <button type="button" className="button">Sign up</button>
+    <button type="button" onClick={ handleSubmit }  className="button">Sign up</button>
     {/* <p>OR</p>
     <div className="button google-button">
       <div className="google-button__google-icon"></div>
@@ -51,7 +52,7 @@ const Signup = () => {
     <div className="content__submit--line"></div>
     <p>
       Already have an account? 
-      <Link to="/">Log In</Link>
+      <Link  className="link" to="/">Log In</Link>
     </p>
     <div className="content__footer">
       <p>
