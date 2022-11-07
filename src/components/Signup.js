@@ -2,12 +2,19 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './signup.css';
 import { useUserAuth } from "../context/UserAuthContext";
+import { addDoc, collection, } from "firebase/firestore";
+import { db } from '../Firebase'
+
 
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    username: "",
+    password: "",
+    location: ""
+  })
+  const [error, setError] = useState("")
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
 
@@ -15,7 +22,8 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signUp(formData.email, formData.password,);
+      saveData()
       alert("registered successfully")
       navigate("/");
     } catch (err) {
@@ -23,6 +31,16 @@ const Signup = () => {
     }
   }
 
+  const saveData = () => {
+  //make a request to the database to save data
+  addDoc(collection(db,"users"),formData)
+  .then(()=>{
+   console.log("users saved successfully")
+   })
+   .catch(error => console.log(error))
+   }
+
+   
 
 
   return (
@@ -33,11 +51,17 @@ const Signup = () => {
 <div className="main-container__content">
   <div className="content__inputs">
     <form className="content__input--form" >
+    <label Htmlfor="username">
+        <input type="username" placeholder="username"  value={formData.username} onChange={(e) => setFormData({...formData,username:e.target.value})} />
+      </label>
       <label Htmlfor="email">
-        <input type="email" placeholder="Email"  value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input type="email" placeholder="Email"  value={formData.email} onChange={(e) => setFormData({...formData, email:e.target.value})} />
       </label>
       <label Htmlfor="password">
-        <input type="password" placeholder="Password"  value={password}  onChange={(e) => setPassword(e.target.value)}/>
+        <input type="password" placeholder="Password"  value={formData.password}  onChange={(e) => setFormData({...formData,password:e.target.value})}/>
+      </label>
+      <label Htmlfor="location">
+        <input type="location" placeholder="Location"  value={formData.location} onChange={(e) => setFormData({...formData,location:e.target.value})} />
       </label>
     </form>
   </div>

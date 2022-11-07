@@ -14,7 +14,7 @@ const Dashboard = () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }
 
   return (
     <div className='dash-body'>
