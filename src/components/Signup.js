@@ -7,6 +7,7 @@ import { db } from '../Firebase'
 
 
 
+
 const Signup = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -22,8 +23,14 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(formData.email, formData.password,);
-      saveData()
+     const res = await signUp(formData.email, formData.password);
+     const user = res.user;
+    await addDoc(collection(db, "users"), {
+      uid: user.uid,
+      formData,
+      authProvider: "local",
+    
+    })
       alert("registered successfully")
       navigate("/");
     } catch (err) {
@@ -31,14 +38,14 @@ const Signup = () => {
     }
   }
 
-  const saveData = () => {
-  //make a request to the database to save data
-  addDoc(collection(db,"users"),formData)
-  .then(()=>{
-   console.log("users saved successfully")
-   })
-   .catch(error => console.log(error))
-   }
+  // const saveData = () => {
+  // //make a request to the database to save data
+  // addDoc(collection(db,"users"),formData)
+  // .then(()=>{
+  //  console.log("users saved successfully")
+  //  })
+  //  .catch(error => console.log(error))
+  //  }
 
    
 
